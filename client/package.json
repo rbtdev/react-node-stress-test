@@ -2,11 +2,20 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3000",
+  "proxy": {
+    "/": {
+      "target": "http://localhost:3000"
+    },
+    "/socket.io": {
+      "target": "ws://localhost:3000",
+      "ws": true
+    }
+  },
   "dependencies": {
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-scripts": "1.0.17"
+    "react-scripts": "1.0.17",
+    "socket.io-client": "^2.0.4"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,9 +1,13 @@
 .messages {
+    text-align: left;
     display: inline-block;
     width: 300px;
     padding: 5px;
     border: 1px solid #777777;
-    margin: 2px
+    margin: 2px;
+    visibility: hidden;
 }
-
+.messages.loaded {
+    visibility: visible;
+}
 .message {}

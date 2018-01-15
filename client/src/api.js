@@ -1,21 +1,27 @@
-class Api {
+import { EventEmitter } from "events";
+import io from "socket.io-client";
+
+
+
+class Api extends EventEmitter {
     constructor() {
+        super();
+        this.setMaxListeners(100)
+        this.socket = io('/messages');
+        this.socket.on('messages', (data) => {
+            this.emit('messages', data);
+        })
+
     };
 
-    getNewMessages(_opts) {
-        return fetch('/api/messages')
-            .then(res => {
-                if (!res.ok) {
-                    throw Error(res.statusText);
-                } else {
-                    return res.json()
-                }
-            })
-            .catch(err => {
-                console.log('Error:' + err);
-                return [];
-            });
+    set (settings) {
+        debugger
+        this.socket.emit('set', settings);
+    }
+
+    start () {
+        this.socket.emit('start')
     }
 }
 
-export default new Api ();
+export default new Api();
